@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Learning Hub</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: 'DM Sans', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+
+    .hero-pattern {
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(59,130,246,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16,185,129,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(245,158,11,0.06) 0%, transparent 50%);
+    }
+
+    .material-card {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .material-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
+    }
+
+    .video-card {
+      transition: all 0.3s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.2s; }
+    .fade-up:nth-child(3) { animation-delay: 0.3s; }
+    .fade-up:nth-child(4) { animation-delay: 0.4s; }
+
+    .nav-active { border-bottom: 3px solid; }
+
+    .modal-overlay {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .tag { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto" style="background-color: #fafbfc;"><!-- Navigation -->
+   <nav id="navbar" class="sticky top-0 z-50 border-b" style="background: rgba(250,251,252,0.92); backdrop-filter: blur(12px); border-color: #e2e6ea;">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg" style="background: #1e3a5f;">
+       E
+      </div>
+      <div>
+       <div id="nav-title" class="font-display font-bold text-lg" style="color: #1e3a5f;">
+        English Learning Hub
+       </div>
+       <div id="nav-school" class="text-xs" style="color: #6b7b8d;">
+        SMA Negeri Taruna Nala Jawa Timur
+       </div>
+      </div>
+     </div>
+     <div class="hidden md:flex items-center gap-6 text-sm font-medium" style="color: #6b7b8d;"><a href="#materi" class="hover:text-[#1e3a5f] transition">Materi</a> <a href="#gallery" class="hover:text-[#1e3a5f] transition">Video</a>
+     </div>
+    </div>
+   </nav><!-- Hero -->
+   <header class="hero-pattern py-16 md:py-24 px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+     <div class="tag mb-4" style="background: #e8f0fe; color: #1e3a5f;">
+      📚 Bahasa Inggris — SMA
+     </div>
+     <h1 id="hero-title" class="font-display font-800 text-4xl md:text-5xl lg:text-6xl leading-tight mb-5" style="color: #1e3a5f;">English Learning Hub</h1>
+     <p class="text-lg md:text-xl leading-relaxed mb-2" style="color: #4a5e73;">Selamat datang di portal pembelajaran Bahasa Inggris.</p>
+     <p id="hero-teacher" class="text-base" style="color: #6b7b8d;">Diampu oleh <strong style="color: #1e3a5f;">Guru Bahasa Inggris</strong> — SMA Negeri Taruna Nala Jawa Timur</p>
+    </div>
+   </header><!-- Materi Section -->
+   <section id="materi" class="max-w-6xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+     <div class="tag mb-3" style="background: #fef3e2; color: #b45309;">
+      Kurikulum
+     </div>
+     <h2 class="font-display font-bold text-3xl md:text-4xl mb-3" style="color: #1e3a5f;">Materi Pembelajaran</h2>
+     <p class="text-base max-w-xl mx-auto" style="color: #6b7b8d;">Empat jenis teks utama yang akan kamu pelajari semester ini</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6" id="material-cards"><!-- Descriptive Text -->
+     <div class="material-card fade-up rounded-2xl border p-6 cursor-pointer" style="background: #ffffff; border-color: #e2e6ea;" onclick="showDetail('descriptive')">
+      <div class="flex items-start gap-4 mb-4">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #dbeafe; color: #2563eb;"><i data-lucide="eye" style="width:24px;height:24px;"></i>
+       </div>
+       <div>
+        <h3 class="font-display font-bold text-xl mb-1" style="color: #1e3a5f;">Descriptive Text</h3>
+        <div class="tag" style="background: #dbeafe; color: #2563eb;">
+         Mendeskripsikan
+        </div>
+       </div>
+      </div>
+      <p class="text-sm leading-relaxed mb-4" style="color: #4a5e73;">Teks yang bertujuan <strong>menggambarkan atau melukiskan</strong> sesuatu secara detail — bisa berupa orang, tempat, hewan, atau benda. Menggunakan <em>Simple Present Tense</em> dan kaya akan <em>adjectives</em> (kata sifat).</p>
+      <div class="text-sm" style="color: #6b7b8d;"><strong style="color:#1e3a5f;">Struktur:</strong> Identification → Description
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm font-semibold" style="color: #2563eb;"><span>Pelajari Selengkapnya</span> <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </div>
+     </div><!-- Narrative Text -->
+     <div class="material-card fade-up rounded-2xl border p-6 cursor-pointer" style="background: #ffffff; border-color: #e2e6ea;" onclick="showDetail('narrative')">
+      <div class="flex items-start gap-4 mb-4">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #fce7f3; color: #db2777;"><i data-lucide="book-open" style="width:24px;height:24px;"></i>
+       </div>
+       <div>
+        <h3 class="font-display font-bold text-xl mb-1" style="color: #1e3a5f;">Narrative Text</h3>
+        <div class="tag" style="background: #fce7f3; color: #db2777;">
+         Bercerita
+        </div>
+       </div>
+      </div>
+      <p class="text-sm leading-relaxed mb-4" style="color: #4a5e73;">Teks yang bertujuan <strong>menghibur pembaca</strong> melalui cerita yang memiliki konflik dan penyelesaian. Meliputi fabel, legenda, fairy tale, dan cerita fiksi lainnya. Menggunakan <em>Simple Past Tense</em>.</p>
+      <div class="text-sm" style="color: #6b7b8d;"><strong style="color:#1e3a5f;">Struktur:</strong> Orientation → Complication → Resolution → (Coda)
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm font-semibold" style="color: #db2777;"><span>Pelajari Selengkapnya</span> <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </div>
+     </div><!-- Recount Text -->
+     <div class="material-card fade-up rounded-2xl border p-6 cursor-pointer" style="background: #ffffff; border-color: #e2e6ea;" onclick="showDetail('recount')">
+      <div class="flex items-start gap-4 mb-4">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #d1fae5; color: #059669;"><i data-lucide="clock" style="width:24px;height:24px;"></i>
+       </div>
+       <div>
+        <h3 class="font-display font-bold text-xl mb-1" style="color: #1e3a5f;">Recount Text</h3>
+        <div class="tag" style="background: #d1fae5; color: #059669;">
+         Menceritakan Ulang
+        </div>
+       </div>
+      </div>
+      <p class="text-sm leading-relaxed mb-4" style="color: #4a5e73;">Teks yang bertujuan <strong>menceritakan kembali</strong> pengalaman atau peristiwa yang telah terjadi secara kronologis. Contoh: diary, laporan perjalanan, biografi. Menggunakan <em>Simple Past Tense</em>.</p>
+      <div class="text-sm" style="color: #6b7b8d;"><strong style="color:#1e3a5f;">Struktur:</strong> Orientation → Events → Reorientation
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm font-semibold" style="color: #059669;"><span>Pelajari Selengkapnya</span> <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </div>
+     </div><!-- Procedure Text -->
+     <div class="material-card fade-up rounded-2xl border p-6 cursor-pointer" style="background: #ffffff; border-color: #e2e6ea;" onclick="showDetail('procedure')">
+      <div class="flex items-start gap-4 mb-4">
+       <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #fef3c7; color: #d97706;"><i data-lucide="list-ordered" style="width:24px;height:24px;"></i>
+       </div>
+       <div>
+        <h3 class="font-display font-bold text-xl mb-1" style="color: #1e3a5f;">Procedure Text</h3>
+        <div class="tag" style="background: #fef3c7; color: #d97706;">
+         Langkah-langkah
+        </div>
+       </div>
+      </div>
+      <p class="text-sm leading-relaxed mb-4" style="color: #4a5e73;">Teks yang bertujuan <strong>memberikan petunjuk</strong> cara membuat atau melakukan sesuatu secara berurutan. Contoh: resep masakan, manual penggunaan. Menggunakan <em>imperative sentences</em> dan <em>action verbs</em>.</p>
+      <div class="text-sm" style="color: #6b7b8d;"><strong style="color:#1e3a5f;">Struktur:</strong> Goal → Materials → Steps
+      </div>
+      <div class="mt-4 flex items-center gap-2 text-sm font-semibold" style="color: #d97706;"><span>Pelajari Selengkapnya</span> <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </div>
+     </div>
+    </div>
+   </section><!-- Video Gallery Section -->
+   <section id="gallery" class="py-16 px-4" style="background: #f0f3f7;">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-10">
+      <div class="tag mb-3" style="background: #ede9fe; color: #7c3aed;">
+       Galeri
+      </div>
+      <h2 class="font-display font-bold text-3xl md:text-4xl mb-3" style="color: #1e3a5f;">Video Pembelajaran</h2>
+      <p class="text-base max-w-xl mx-auto mb-6" style="color: #6b7b8d;">Kumpulan video penjelasan materi untuk memperdalam pemahaman</p><!-- Add Video Button --> <button onclick="openAddVideo()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition hover:opacity-90" style="background: #1e3a5f;"> <i data-lucide="plus" style="width:18px;height:18px;"></i> Tambah Video </button>
+     </div><!-- Filter Tabs -->
+     <div class="flex flex-wrap justify-center gap-2 mb-8" id="filter-tabs"><button onclick="filterVideos('all')" class="filter-btn active px-4 py-2 rounded-full text-sm font-medium transition" style="background:#1e3a5f;color:#fff;">Semua</button> <button onclick="filterVideos('descriptive')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition" style="background:#e2e6ea;color:#4a5e73;">Descriptive</button> <button onclick="filterVideos('narrative')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition" style="background:#e2e6ea;color:#4a5e73;">Narrative</button> <button onclick="filterVideos('recount')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition" style="background:#e2e6ea;color:#4a5e73;">Recount</button> <button onclick="filterVideos('procedure')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition" style="background:#e2e6ea;color:#4a5e73;">Procedure</button>
+     </div>
+     <div id="video-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Videos rendered by JS -->
+     </div>
+     <div id="empty-video" class="text-center py-16 hidden">
+      <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:#e2e6ea;"><i data-lucide="video" style="width:28px;height:28px;color:#6b7b8d;"></i>
+      </div>
+      <p class="font-medium" style="color:#4a5e73;">Belum ada video</p>
+      <p class="text-sm mt-1" style="color:#6b7b8d;">Klik "Tambah Video" untuk menambahkan video pembelajaran</p>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-4 text-center border-t" style="border-color: #e2e6ea;">
+    <p class="text-sm" style="color: #6b7b8d;">© 2025 English Learning Hub — SMA Negeri Taruna Nala Jawa Timur</p>
+   </footer><!-- Detail Modal -->
+   <div id="detail-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="modal-overlay absolute inset-0" onclick="closeDetail()"></div>
+    <div class="absolute inset-4 md:inset-8 lg:inset-12 rounded-2xl overflow-auto" style="background:#ffffff;" id="detail-content"><!-- filled by JS -->
+    </div>
+   </div><!-- Add Video Modal -->
+   <div id="add-video-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+    <div class="modal-overlay absolute inset-0" onclick="closeAddVideo()"></div>
+    <div class="relative rounded-2xl p-6 w-full max-w-md" style="background:#ffffff;">
+     <h3 class="font-display font-bold text-xl mb-5" style="color:#1e3a5f;">Tambah Video</h3>
+     <form onsubmit="addVideo(event)"><label class="block text-sm font-medium mb-1" style="color:#4a5e73;" for="v-title">Judul Video</label> <input id="v-title" type="text" required placeholder="Contoh: Penjelasan Descriptive Text" class="w-full border rounded-xl px-4 py-2.5 text-sm mb-4 focus:outline-none focus:ring-2" style="border-color:#e2e6ea; focus:ring-color:#1e3a5f;"> <label class="block text-sm font-medium mb-1" style="color:#4a5e73;" for="v-url">Link YouTube</label> <input id="v-url" type="url" required placeholder="https://www.youtube.com/watch?v=..." class="w-full border rounded-xl px-4 py-2.5 text-sm mb-4 focus:outline-none focus:ring-2" style="border-color:#e2e6ea;"> <label class="block text-sm font-medium mb-1" style="color:#4a5e73;" for="v-cat">Kategori Materi</label> <select id="v-cat" required class="w-full border rounded-xl px-4 py-2.5 text-sm mb-5 focus:outline-none focus:ring-2" style="border-color:#e2e6ea;"> <option value="descriptive">Descriptive Text</option> <option value="narrative">Narrative Text</option> <option value="recount">Recount Text</option> <option value="procedure">Procedure Text</option> </select>
+      <div class="flex gap-3"><button type="button" onclick="closeAddVideo()" class="flex-1 px-4 py-2.5 rounded-xl font-medium text-sm border" style="border-color:#e2e6ea;color:#4a5e73;">Batal</button> <button type="submit" class="flex-1 px-4 py-2.5 rounded-xl font-medium text-sm text-white" style="background:#1e3a5f;">Tambah</button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <script>
+  // ========== CONFIG & SDK ==========
+  const defaultConfig = {
+    site_title: 'English Learning Hub',
+    teacher_name: 'Guru Bahasa Inggris',
+    school_name: 'SMA Negeri Taruna Nala Jawa Timur',
+    background_color: '#fafbfc',
+    surface_color: '#ffffff',
+    text_color: '#1e3a5f',
+    primary_action_color: '#2563eb',
+    secondary_action_color: '#6b7b8d',
+    font_family: 'Playfair Display',
+    font_size: 16
+  };
+
+  function applyConfig(c) {
+    const t = c.site_title || defaultConfig.site_title;
+    const teacher = c.teacher_name || defaultConfig.teacher_name;
+    const school = c.school_name || defaultConfig.school_name;
+    const bg = c.background_color || defaultConfig.background_color;
+    const surface = c.surface_color || defaultConfig.surface_color;
+    const txt = c.text_color || defaultConfig.text_color;
+    const primary = c.primary_action_color || defaultConfig.primary_action_color;
+    const secondary = c.secondary_action_color || defaultConfig.secondary_action_color;
+    const ff = c.font_family || defaultConfig.font_family;
+    const fs = c.font_size || defaultConfig.font_size;
+
+    document.getElementById('nav-title').textContent = t;
+    document.getElementById('nav-school').textContent = school;
+    document.getElementById('hero-title').textContent = t;
+    document.getElementById('hero-teacher').innerHTML = `Diampu oleh <strong style="color:${txt}">${teacher}</strong> — ${school}`;
+
+    // Colors
+    document.getElementById('app').style.backgroundColor = bg;
+    document.querySelectorAll('.material-card').forEach(el => el.style.backgroundColor = surface);
+    document.querySelectorAll('.font-display').forEach(el => el.style.color = txt);
+
+    // Fonts
+    const fontStack = `${ff}, serif`;
+    document.querySelectorAll('.font-display').forEach(el => el.style.fontFamily = fontStack);
+    const baseFont = `${ff}, DM Sans, sans-serif`;
+    document.body.style.fontFamily = `DM Sans, sans-serif`;
+
+    // Font size
+    document.body.style.fontSize = `${fs}px`;
+  }
+
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => applyConfig(config),
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: v => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+        { get: () => config.surface_color || defaultConfig.surface_color, set: v => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: v => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: v => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+        { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: v => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+      ],
+      borderables: [],
+      fontEditable: {
+        get: () => config.font_family || defaultConfig.font_family,
+        set: v => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+      },
+      fontSizeable: {
+        get: () => config.font_size || defaultConfig.font_size,
+        set: v => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+      }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['site_title', config.site_title || defaultConfig.site_title],
+      ['teacher_name', config.teacher_name || defaultConfig.teacher_name],
+      ['school_name', config.school_name || defaultConfig.school_name]
+    ])
+  });
+
+  // ========== MATERIAL DETAILS ==========
+  const materials = {
+    descriptive: {
+      icon: 'eye', color: '#2563eb', bg: '#dbeafe', title: 'Descriptive Text',
+      purpose: 'Mendeskripsikan atau menggambarkan seseorang, tempat, hewan, atau benda secara detail sehingga pembaca seolah-olah dapat melihat, mendengar, atau merasakan apa yang digambarkan.',
+      structure: [
+        { name: 'Identification', desc: 'Memperkenalkan subjek yang akan dideskripsikan (siapa/apa).' },
+        { name: 'Description', desc: 'Menjelaskan ciri-ciri, sifat, penampilan, kebiasaan, atau kualitas subjek secara rinci.' }
+      ],
+      features: ['Menggunakan Simple Present Tense', 'Banyak menggunakan adjectives (kata sifat)', 'Menggunakan linking verbs: is, am, are, has, have', 'Menggunakan figurative language (simile, metaphor)', 'Focus pada satu objek tertentu'],
+      example: `<strong>My Beloved Cat</strong><br><br>I have a cat named Milo. He is a two-year-old Persian cat with thick, white fur and bright blue eyes.<br><br>Milo is very playful and loves chasing a small red ball around the house. He has a short, fluffy tail and tiny pink paws. Every morning, he sits by the window and watches the birds outside. He is the most adorable pet I have ever had.`
+    },
+    narrative: {
+      icon: 'book-open', color: '#db2777', bg: '#fce7f3', title: 'Narrative Text',
+      purpose: 'Menghibur pembaca/pendengar melalui cerita yang mengandung konflik dan penyelesaian. Sering mengandung pesan moral.',
+      structure: [
+        { name: 'Orientation', desc: 'Memperkenalkan tokoh, latar tempat, dan latar waktu.' },
+        { name: 'Complication', desc: 'Munculnya masalah atau konflik yang dihadapi tokoh.' },
+        { name: 'Resolution', desc: 'Penyelesaian masalah — bisa bahagia atau sedih.' },
+        { name: 'Coda (opsional)', desc: 'Pesan moral atau pelajaran dari cerita.' }
+      ],
+      features: ['Menggunakan Simple Past Tense', 'Menggunakan time connectives: once upon a time, then, finally', 'Terdapat tokoh (characters) dan dialog', 'Mengandung konflik dan penyelesaian', 'Contoh: fabel, legenda, fairy tale, mitos'],
+      example: `<strong>The Fox and The Grapes</strong><br><br>One afternoon, a fox was walking through the forest when he spotted a bunch of grapes hanging from a high branch.<br><br>"Those grapes look delicious!" he thought. He jumped and jumped, but he could not reach them. After many tries, the fox walked away and said, "Those grapes are probably sour anyway."<br><br><em>Moral: It is easy to despise what you cannot have.</em>`
+    },
+    recount: {
+      icon: 'clock', color: '#059669', bg: '#d1fae5', title: 'Recount Text',
+      purpose: 'Menceritakan kembali peristiwa atau pengalaman yang telah terjadi secara kronologis (berurutan waktu).',
+      structure: [
+        { name: 'Orientation', desc: 'Memberikan informasi tentang siapa, apa, di mana, dan kapan.' },
+        { name: 'Events', desc: 'Rangkaian peristiwa yang diceritakan secara berurutan.' },
+        { name: 'Reorientation', desc: 'Penutup — komentar atau kesan pribadi tentang pengalaman tersebut.' }
+      ],
+      features: ['Menggunakan Simple Past Tense', 'Menggunakan time connectives: first, then, after that, finally', 'Diceritakan secara kronologis', 'Menggunakan first person (I, we) atau third person (he, she)', 'Contoh: diary, jurnal perjalanan, biografi'],
+      example: `<strong>My Holiday in Bali</strong><br><br>Last summer, my family and I went to Bali for a week. We stayed at a small hotel near Kuta Beach.<br><br>On the first day, we visited Tanah Lot Temple. The view was breathtaking. The next day, we spent the whole afternoon swimming and building sandcastles. On our last day, we went shopping for souvenirs.<br><br>It was the best holiday I have ever had. I hope we can go back again someday.`
+    },
+    procedure: {
+      icon: 'list-ordered', color: '#d97706', bg: '#fef3c7', title: 'Procedure Text',
+      purpose: 'Memberikan petunjuk atau instruksi tentang cara membuat atau melakukan sesuatu secara berurutan.',
+      structure: [
+        { name: 'Goal / Aim', desc: 'Tujuan — apa yang akan dibuat atau dilakukan.' },
+        { name: 'Materials (opsional)', desc: 'Bahan-bahan atau alat yang dibutuhkan.' },
+        { name: 'Steps', desc: 'Langkah-langkah yang harus dilakukan secara berurutan.' }
+      ],
+      features: ['Menggunakan imperative sentences (kalimat perintah): cut, boil, mix', 'Menggunakan action verbs', 'Menggunakan sequence connectives: first, next, then, finally', 'Menggunakan simple present tense', 'Contoh: resep, manual, tutorial DIY'],
+      example: `<strong>How to Make a Cup of Tea</strong><br><br><u>Materials:</u> Tea bag, hot water, sugar, a cup, a spoon.<br><br><u>Steps:</u><br>1. First, boil some water.<br>2. Put a tea bag into a cup.<br>3. Pour the hot water into the cup.<br>4. Wait for 3-5 minutes.<br>5. Remove the tea bag.<br>6. Add sugar to taste and stir well.<br>7. Your tea is ready to drink!`
+    }
+  };
+
+  function showDetail(key) {
+    const m = materials[key];
+    const modal = document.getElementById('detail-modal');
+    const content = document.getElementById('detail-content');
+    content.innerHTML = `
+      <div class="p-6 md:p-10 max-w-3xl mx-auto">
+        <button onclick="closeDetail()" class="mb-6 flex items-center gap-2 text-sm font-medium" style="color:#6b7b8d;">
+          <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Kembali
+        </button>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:${m.bg};color:${m.color};">
+            <i data-lucide="${m.icon}" style="width:28px;height:28px;"></i>
+          </div>
+          <h2 class="font-display font-bold text-3xl" style="color:#1e3a5f;">${m.title}</h2>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="font-display font-bold text-lg mb-2" style="color:#1e3a5f;">🎯 Tujuan (Purpose)</h3>
+          <p class="text-sm leading-relaxed" style="color:#4a5e73;">${m.purpose}</p>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="font-display font-bold text-lg mb-3" style="color:#1e3a5f;">🏗️ Struktur (Generic Structure)</h3>
+          <div class="space-y-3">
+            ${m.structure.map((s, i) => `
+              <div class="flex gap-3 items-start">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-white font-bold text-sm" style="background:${m.color};">${i + 1}</div>
+                <div>
+                  <div class="font-semibold text-sm" style="color:#1e3a5f;">${s.name}</div>
+                  <div class="text-sm" style="color:#6b7b8d;">${s.desc}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="font-display font-bold text-lg mb-3" style="color:#1e3a5f;">✨ Ciri Kebahasaan (Language Features)</h3>
+          <ul class="space-y-2">
+            ${m.features.map(f => `<li class="flex items-start gap-2 text-sm" style="color:#4a5e73;"><span style="color:${m.color};">•</span> ${f}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="rounded-xl p-5 border" style="background:${m.bg}22;border-color:${m.bg};">
+          <h3 class="font-display font-bold text-lg mb-3" style="color:#1e3a5f;">📝 Contoh (Example)</h3>
+          <div class="text-sm leading-relaxed" style="color:#4a5e73;">${m.example}</div>
+        </div>
+      </div>
+    `;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+  }
+
+  function closeDetail() {
+    document.getElementById('detail-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // ========== VIDEO GALLERY ==========
+  let videos = [
+    { id: 1, title: 'Descriptive Text - Penjelasan Lengkap', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', category: 'descriptive' },
+    { id: 2, title: 'Cara Menulis Narrative Text', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', category: 'narrative' },
+    { id: 3, title: 'Recount Text - Contoh dan Pembahasan', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', category: 'recount' },
+  ];
+  let currentFilter = 'all';
+  let nextId = 4;
+
+  function getYouTubeId(url) {
+    const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  const catColors = {
+    descriptive: { bg: '#dbeafe', color: '#2563eb', label: 'Descriptive' },
+    narrative: { bg: '#fce7f3', color: '#db2777', label: 'Narrative' },
+    recount: { bg: '#d1fae5', color: '#059669', label: 'Recount' },
+    procedure: { bg: '#fef3c7', color: '#d97706', label: 'Procedure' }
+  };
+
+  function renderVideos() {
+    const grid = document.getElementById('video-grid');
+    const empty = document.getElementById('empty-video');
+    const filtered = currentFilter === 'all' ? videos : videos.filter(v => v.category === currentFilter);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '';
+      empty.classList.remove('hidden');
+      lucide.createIcons();
+      return;
+    }
+    empty.classList.add('hidden');
+
+    grid.innerHTML = filtered.map(v => {
+      const ytId = getYouTubeId(v.url);
+      const cat = catColors[v.category];
+      const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/mqdefault.jpg` : '';
+      return `
+        <div class="video-card rounded-2xl overflow-hidden border" style="background:#fff;border-color:#e2e6ea;" data-vid="${v.id}">
+          <a href="${v.url}" target="_blank" rel="noopener noreferrer" class="block relative group">
+            ${ytId ? `<img src="${thumb}" alt="${v.title}" loading="lazy" class="w-full aspect-video object-cover" onerror="this.style.background='#e2e6ea';this.alt='Thumbnail unavailable';">` : `<div class="w-full aspect-video flex items-center justify-center" style="background:#e2e6ea;"><i data-lucide="video" style="width:40px;height:40px;color:#6b7b8d;"></i></div>`}
+            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
+                <i data-lucide="play" style="width:24px;height:24px;color:#1e3a5f;margin-left:2px;"></i>
+              </div>
+            </div>
+          </a>
+          <div class="p-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="tag" style="background:${cat.bg};color:${cat.color};">${cat.label}</span>
+              <button onclick="removeVideo(${v.id})" class="p-1 rounded-lg hover:bg-gray-100 transition" title="Hapus video">
+                <i data-lucide="trash-2" style="width:14px;height:14px;color:#6b7b8d;"></i>
+              </button>
+            </div>
+            <h4 class="font-semibold text-sm leading-snug" style="color:#1e3a5f;">${v.title}</h4>
+          </div>
+        </div>
+      `;
+    }).join('');
+    lucide.createIcons();
+  }
+
+  function filterVideos(cat) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const isActive = btn.textContent.toLowerCase().replace(' ', '') === cat || (cat === 'all' && btn.textContent === 'Semua');
+      btn.style.background = isActive ? '#1e3a5f' : '#e2e6ea';
+      btn.style.color = isActive ? '#fff' : '#4a5e73';
+    });
+    renderVideos();
+  }
+
+  function openAddVideo() { document.getElementById('add-video-modal').classList.remove('hidden'); }
+  function closeAddVideo() { document.getElementById('add-video-modal').classList.add('hidden'); }
+
+  function addVideo(e) {
+    e.preventDefault();
+    const title = document.getElementById('v-title').value.trim();
+    const url = document.getElementById('v-url').value.trim();
+    const category = document.getElementById('v-cat').value;
+    if (!title || !url) return;
+    videos.push({ id: nextId++, title, url, category });
+    document.getElementById('v-title').value = '';
+    document.getElementById('v-url').value = '';
+    closeAddVideo();
+    renderVideos();
+  }
+
+  function removeVideo(id) {
+    const card = document.querySelector(`[data-vid="${id}"]`);
+    if (card) {
+      const btn = card.querySelector('button[title="Hapus video"]');
+      if (btn.dataset.confirm) {
+        videos = videos.filter(v => v.id !== id);
+        renderVideos();
+      } else {
+        btn.dataset.confirm = 'true';
+        btn.innerHTML = '<span style="color:#ef4444;font-size:11px;font-weight:600;">Hapus?</span>';
+        setTimeout(() => { if (btn) { delete btn.dataset.confirm; btn.innerHTML = '<i data-lucide="trash-2" style="width:14px;height:14px;color:#6b7b8d;"></i>'; lucide.createIcons(); } }, 2500);
+      }
+    }
+  }
+
+  // Init
+  renderVideos();
+  lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e5d4e7ae60bd4de',t:'MTc3NTEwNjQxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
